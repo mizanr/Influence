@@ -130,10 +130,11 @@
     </ion-item>
 
     <ion-item *ngIf="formData.user_type=='2'" no-lines>
-      <p>TikTok Channel Link</p>
+      <!-- <p>{{'FACEBOOK_CHANNEL_LINK' | translate}}</p> -->
+      <p>Tik Tok Channel Link</p>
       <ion-row align-items-center>
         <ion-col no-padding>
-          <span>https://www.tiktok.com/</span>
+          <span>https://www.tiktok.com//</span>
         </ion-col>
         <ion-col no-padding>
           <input [(ngModel)]="formData.tiktok_channel">

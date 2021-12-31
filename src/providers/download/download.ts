@@ -119,18 +119,20 @@ export class DownloadProvider {
     console.log('File Name----', filename);
 
     return new Promise((resolve, reject) => {
-
       var localurl = this.file.externalRootDirectory + "Download/";
       this.file.checkFile(localurl, filename).then((res) => {
         console.log('file found', res);
+        this.mediaP.getMime(localurl).then((mimeType: any) => {
+          this.fileOpener.open(localurl, mimeType).then(r => {
+            console.log('file opened successfully!');
+          })
+        })
         resolve(1)
       }).catch((err) => {
         resolve(0);
         console.log('file not found', err);
+        // this.alert.presentToast('file not found','bottom');
       });
-
-
-
     });
   }
 

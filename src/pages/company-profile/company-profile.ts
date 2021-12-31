@@ -99,7 +99,7 @@ export class CompanyProfilePage {
     if((this.auth.isUserLoggedIn()&&this.auth.getUserDetails().user_type==2) || isguest==2){
       url = `GetInfluOpenJobs`;
      } else {
-      url = `GetCompanyOpenJobs`;
+      url = `GetCompanyOepnJobs`;
      }
     this.api.get(data,0,url).then((res: any) => {
       this.getHiredService();
@@ -160,7 +160,7 @@ export class CompanyProfilePage {
 
 
   postdetail(id) {
-    // let profileModal = this.modalCtrl.create('PostDeta0ilPage', { PostId: id }, { cssClass: "alertModal", enableBackdropDismiss: true, showBackdrop: true });
+    // let profileModal = this.modalCtrl.create('PostDetailPage', { PostId: id }, { cssClass: "alertModal", enableBackdropDismiss: true, showBackdrop: true });
     // profileModal.present();
     this.navCtrl.push('PostDetailPage', { PostId: id });
   }
@@ -186,7 +186,7 @@ export class CompanyProfilePage {
       "block_to":  this.ownerId,
       "block_by":this.auth.getCurrentUserId()
     }
-    //https://www.webwiwders.com/WEB01/Influ/Api/BlockCompany?block_by=51&block_to=52
+    //https://www.webwiders.com/WEB01/Influ/Api/BlockCompany?block_by=51&block_to=52
       this.api.get(data,1,'BlockCompany').then((res:any)=>{
             if(res.status==1){
               this.navCtrl.pop();

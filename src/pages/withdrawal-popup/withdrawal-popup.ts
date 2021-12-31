@@ -3,15 +3,6 @@ import {NavController, NavParams, ViewController } from 'ionic-angular';
 import { AlertProvider } from '../../providers/alert/alert';
 import { RestApiProvider } from '../../providers/rest-api/rest-api';
 
-/**
- * Generated class for the WithdrawalPopupPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
-// @IonicPage()
-
 
 
 @Component({

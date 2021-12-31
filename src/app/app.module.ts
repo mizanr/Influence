@@ -56,6 +56,7 @@ import { CommonModule } from '@angular/common';
 import { StarRatingModule } from 'ionic3-star-rating';
 import { RatePopupPage } from '../pages/rate-popup/rate-popup';
 import { Facebook } from '@ionic-native/facebook';
+
 import { IOSFilePicker } from '@ionic-native/file-picker';
 import { WithdrawalPopupPage } from '../pages/withdrawal-popup/withdrawal-popup';
 
@@ -69,6 +70,7 @@ export function createTranslateLoader(http: HttpClient) {
     TabsPage,
     RatePopupPage,
     WithdrawalPopupPage,
+    WithdrawalPopupPage
   ],
   imports: [
     StarRatingModule,

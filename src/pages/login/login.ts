@@ -70,7 +70,7 @@ export class LoginPage {
       this.encrypt.getEncryptedData2(this.loginForm.controls.password.value).then((r: any) => {
         let data = {
           "email": { "value": this.loginForm.controls.email.value, "type": "EMAIL" },
-          "password": { "value":r, "type": "NO" },
+          "password": { "value": r, "type": "NO" },
         }
         this.api.postData(data, 0, 'login').then((res: any) => {
           if (res.status == 1) {

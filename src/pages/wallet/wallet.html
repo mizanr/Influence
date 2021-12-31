@@ -169,9 +169,9 @@
         {{'HIRED_BY' | translate}}: <strong>{{s.company_name}}</strong></h3>
       <h3>{{'EARN_AMOUNT' | translate}}: ${{s.user_amount}}</h3>
       <h3>Service Fee: ${{s.service_fee}}</h3>
-      <p>{{s.created_at.replace(' ','T') | date:'MMM,dd,yyyy , hh:mm:a'}}</p>
+      <p>{{s.created_at | date:'MMM,dd,yyyy , hh:mm:a'}}</p>
     </ion-item>
-    <div class="noDatadiv" *ngIf="earnings.length==0">
+    <div class="noDatadiv" *ngIf="histories.length==0">
       <ion-icon name="ios-search-outline"></ion-icon>
       <p>{{'NO_DATA_FOUND' | translate}}</p>
     </div>

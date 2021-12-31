@@ -58,11 +58,8 @@ is_paypal_check:any=false;
   }
 
   opne_inapp() {
-    // this.alert.presentToast('msizantest in app button clicked','bottom');
     const browser = this.iab.create('https://app-api.influen.site/button.php', '_blank','location=no,clearsessioncache=yes');
-    browser.show();
-    // this.alert.presentToast('miszantest created -----','bottom');
-    browser.insertCSS({code:"body{background-color:white;height:100vh;width:100%;}"});
+    browser.insertCSS({code:"body{background-color:red;height:100vh;width:100%;}"});
     // browser.show();
     browser.on('loadstop').subscribe(event => {  
       console.log('load stop callled........................');
@@ -259,11 +256,7 @@ is_paypal_check:any=false;
   }
 
   paypal_checkevent(ev,paypal:any,inx:any) {
-    // ev.stopPropagation();
     console.log(ev);
-    // if(ev.value==true){
-
-    // }
     if(ev.value==true){
       for(let i =0;i<this.paypal_accounts.length;i++){
         if(inx!=i){
@@ -313,6 +306,7 @@ is_paypal_check:any=false;
       }
     })
   }
+
 
   paypal_popup() {
     const modal = this.modalCtrl.create(WithdrawalPopupPage,{},{cssClass:'moremodel',enableBackdropDismiss:true});

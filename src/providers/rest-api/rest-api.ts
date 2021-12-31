@@ -6,7 +6,7 @@ import { MenuController } from 'ionic-angular/components/app/menu-controller';
 import { AlertProvider } from '../alert/alert'
 // let apiUrl = 'http://bluediamondresearch.com/WEB01/veamel/Api/';
 // let apiUrl = `https://www.webwiders.com/WEB01/Influ/api/`
-let apiUrl = `https://app-api.influen.site/api/`
+let apiUrl = `https://app-api.influen.site/api/`;
 /*
     usefullData
 

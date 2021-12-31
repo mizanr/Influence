@@ -83,6 +83,8 @@ export class ChatPage {
           item.key = childSnapshot.key;
           let otheruser = (item.user1 == this.auth.getCurrentUserId()) ? item.user2 : item.user1;
           item["other_user"] = otheruser;
+          // item['_show_id_'+this.auth.getCurrentUserId()]=true;
+          // item['_show_id_'+otheruser]=true;
           if (!this.users['user_' + otheruser]) {
             users.push(otheruser);
           }
@@ -93,6 +95,7 @@ export class ChatPage {
             m.off('value');
           })
           this.chatList.push(item);
+          console.log('list',this.chatList);
         }
       });
       this.sort();
@@ -194,14 +197,6 @@ export class ChatPage {
     // });
   }
 
-  show(item) {
-    // if(item['_show_id_'+this.auth.getCurrentUserId()]){
-      return item['_show_id_'+this.auth.getCurrentUserId()];
-    // } else {
-    //   return true;
-    // }
-  }
-
   mark_as_delete_chat(item: any, key,roomKey) {
     console.log("mark as delete chat--------");
     let data = {};
@@ -209,22 +204,6 @@ export class ChatPage {
     let chat_ref = firebase.database().ref('chatrooms1/' + roomKey + '/chats/' + item.key);
     chat_ref.update(data);
   }
-
-  // deleteChat(obj) {
-  //   console.log(obj);
-  //   firebase.database().ref('chatrooms1/'+obj.key).remove();
-  //   // let data = {
-  //   //   "user_id": this.auth.getCurrentUserId(),
-  //   //   "job_id": obj.Job_detail.Id,
-  //   //   "receiver_id": obj.sender.id,
-  //   // };
-  //   // this.api.get(data, 1, 'delete_chat').then((result: any) => {
-  //   //   if (result.status == 1) {
-  //   //     this.getChatList(1);
-  //   //   }
-  //   // }, (err) => {
-  //   // });
-  // }
 
 
   openNoti() {
@@ -243,6 +222,14 @@ export class ChatPage {
   // to get a value that is either negative, positive, or zero.
       return c < d ? 1 : -1;  
 });
+  }
+
+  show(item) {
+    // if(item['_show_id_'+this.auth.getCurrentUserId()]){
+      return item['_show_id_'+this.auth.getCurrentUserId()];
+    // } else {
+    //   return true;
+    // }
   }
 
 

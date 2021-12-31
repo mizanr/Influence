@@ -43,7 +43,7 @@ export class CreatePasswordPage {
       "email": { "value": this.navParams.get('Email'), "type": "NO" }
     }
     this.encrypt.getEncryptedData2(this.pass).then((r: any) => {
-      data["password"].value =r;
+      data["password"].value = r; //r.trim();
       console.log('new password-------', r, '-------');
 
       this.api.postData(data, 1, 'create_password').then((res: any) => {

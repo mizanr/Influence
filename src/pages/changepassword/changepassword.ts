@@ -57,8 +57,11 @@ export class ChangepasswordPage {
 
     this.encrypt.getEncryptedData2(this.old_pass).then((cP: any) => {
       this.encrypt.getEncryptedData2(this.new_pass).then((newP: any) => {
+
         Data['current_password'].value = cP;
         Data['password'].value = newP;
+        Data['current_password'].value = cP; // cP.trim();
+        Data['password'].value = newP; //newP.trim();
         this.rest_api.postData(Data, 1, 'change_password').then((result: any) => {
           console.log(result);
           if (result.status == 1) {

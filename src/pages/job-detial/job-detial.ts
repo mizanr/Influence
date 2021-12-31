@@ -206,6 +206,9 @@ export class JobDetialPage {
         }
         data['user_' + other_user_id + '_open'] = false;
         data['user_' + this.auth.getCurrentUserId() + '_open'] = false;
+        data['_show_id_'+this.auth.getCurrentUserId()] = true;
+        data['_show_id_'+other_user_id ] = true;
+        
         console.log('data------------', data);
 
         newData.set(data);

@@ -38,7 +38,6 @@ export class SignupPage {
     category: '',
     gender: 'Any'
   }
-  profile_img_url:any='';
   blob_name: any = '';
   blob: any = '';
   categories: any = [];
@@ -97,7 +96,6 @@ export class SignupPage {
 
       let l = this.navParams.get('SignupData');
       console.log('social login data-----',l);
-      this.profile_img_url=l.profile_img_url;
       this.influForm.controls.first_name.value = l.Fname;
       this.influForm.controls.last_name.value = l.Lname;
       this.influForm.controls.email.value = l.Email;
@@ -169,9 +167,6 @@ export class SignupPage {
     } else {
       passToEncrypt = this.influForm.get(['passwords', 'password']).value
     }
-    console.log('passToEncrypt-------',passToEncrypt);
-    // let r = this.encrypt.getEncryptedData2(passToEncrypt);
-   
     this.encrypt.getEncryptedData2(passToEncrypt).then((r: any) => {
       console.log('Encrypter passwor=========', r);
       r = r;
@@ -202,8 +197,6 @@ export class SignupPage {
         data['zip_code'] = { "value": this.formData.zip_code, "type": "NO" };
         data['company_website'] = { "value": this.companyForm.controls.company_website.value, "type": "NO" };
         data['company_desc'] = { "value": this.companyForm.controls.company_desc.value, "type": "NO" };
-        data['image'] = { "value": this.profile_img_url, "type": "NO" };
-
       } else {
         data['email'] = { "value": this.influForm.controls.email.value, "type": "NO" };
         data['country'] = { "value": this.influForm.controls.country.value, "type": "NO" };
@@ -217,7 +210,6 @@ export class SignupPage {
         data['dob'] = { "value": this.influForm.controls.dob.value, "type": "NO" };
         data['gender'] = { "value": this.influForm.controls.gender.value, "type": "NO" };
         data['category'] = { "value": this.influForm.controls.category.value, "type": "NO" };
-        data['image'] = { "value": this.profile_img_url, "type": "NO" };
       }
       if (this.navParams.get('SignupData')) {
         let l = this.navParams.get('SignupData');

@@ -2,6 +2,7 @@ import { AlertProvider } from './../../providers/alert/alert';
 import { AuthProvider } from './../../providers/auth/auth';
 import { TranslateService } from '@ngx-translate/core';
 import { NavController, ActionSheetController, Events, App } from 'ionic-angular';
+// import { NavController, ActionSheetController, Events } from 'ionic-angular';
 import { RestApiProvider } from './../../providers/rest-api/rest-api';
 import { Component, Input } from '@angular/core';
 
@@ -23,6 +24,7 @@ export class PostComponent {
     // public navCtrl: NavController,
     public trans: TranslateService,
     public events:Events,
+
     public app:App,
     public actionSheetCtrl: ActionSheetController,
     public auth: AuthProvider,
@@ -97,7 +99,9 @@ export class PostComponent {
       "block_to":id,
       "block_by":this.auth.getCurrentUserId()
     }
+
     //https://www.w4ebwiders.com/WEB01/Influ/Api/BlockCompany?block_by=51&block_to=52
+    //https://www.webwiders.com/WEB01/Influ/Api/BlockCompany?block_by=51&block_to=52
       this.api.get(data,1,'BlockCompany').then((res:any)=>{
             if(res.status==1){
               this.events.publish('list_refresh',true);

@@ -40,6 +40,7 @@ export class MyApp {
     public google: GooglePlusProvider,
     public download: DownloadProvider,
     public ensp:EncryptProvider,
+    public encry:EncryptProvider,
     // public config: Config,
     public app: App,
     public ionicApp: IonicApp,
@@ -50,6 +51,7 @@ export class MyApp {
     // this.ensp.getEncryptedData2('kamal');
 
 
+    // this.encry.getEncryptedData2('prasoon');
     platform.ready().then(() => {
       localStorage.removeItem('guest');
       if (platform.is('cordova')) {

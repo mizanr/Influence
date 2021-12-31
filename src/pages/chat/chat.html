@@ -2,9 +2,8 @@
   <ion-navbar>
 
     <ion-buttons start>
-      <button style="min-width: unset;" ion-button menuToggle>
-        <!--  <ion-icon class="icon-theme" name="md-menu"></ion-icon> -->
-        <img src="../../assets/imgs/menu.png" width="20" height="20"> 
+      <button style="width: 17px;min-width: unset;" ion-button menuToggle>
+        <ion-icon class="icon-theme" name="md-menu"></ion-icon>
       </button>
     </ion-buttons>
 
@@ -32,9 +31,8 @@
       <ion-icon name="ios-search-outline"></ion-icon>
       <p>{{'NO_DATA_FOUND' | translate}}</p>
     </div>
-    
-    <div *ngFor="let k of chatList" >
-      <ion-item-sliding #item *ngIf="show(k)" (click)="details(k)">
+    <div *ngFor="let k of chatList">
+      <ion-item-sliding #item  (click)="details(k)" *ngIf="show(k)">
         <ion-item class="chat_list" no-lines>
           <ion-avatar item-start>
             <img *ngIf="users['user_'+k.other_user]" [src]="users['user_'+k.other_user].image">
@@ -58,6 +56,6 @@
         </ion-item-options>
       </ion-item-sliding>
     </div>
- 
+    
   </ion-list>
 </ion-content>

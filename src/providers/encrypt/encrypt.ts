@@ -1,10 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AES256 } from '@ionic-native/aes-256';
-// import  aes256 = require('aes256');
-// import *  as aes256 from 'aes256';
-declare var Aes:any;
 declare var CryptoJS:any;
+
 /*
   Generated class for the EncryptProvider provider.
 
@@ -30,10 +28,9 @@ export class EncryptProvider {
     console.log(this.secureKey + '--------' + this.secureIV);
   }
 
-  getEncryptedData(data) { 
+  getEncryptedData(data) {
     return new Promise((resolve, reject) => {
       this.aes256.encrypt(this.secureKey, this.secureIV, data)
-        // aes256.encrypt(this.secureKey,data)
         .then(res => {
           console.log('Encrypted Data: ', res);
           resolve(res);
