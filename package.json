@@ -82,7 +82,6 @@
     "cordova-android": "^9.1.0",
     "cordova-ios": "^6.2.0",
     "cordova-plugin-device": "^2.0.2",
-    "cordova-plugin-facebook-connect": "^3.2.0",
     "cordova-plugin-facebook4": "^6.4.0",
     "cordova-plugin-filepicker": "^1.1.6",
     "cordova-plugin-inappbrowser-popup-bridge": "^4.1.4",
@@ -124,13 +123,11 @@
         "REVERSED_CLIENT_ID": "com.googleusercontent.apps.726081508891-sdok2n8o0vtd3l5nkn9il3r54n2cmgo1",
         "PLAY_SERVICES_VERSION": "15.0.1"
       },
-      "cordova-plugin-facebook-connect": {
-        "APP_ID": "1759616680896320",
+      "cordova-plugin-facebook4": {
+        "APP_ID": "906494339971056",
         "APP_NAME": "influ",
-        "FACEBOOK_URL_SCHEME_SUFFIX": " ",
-        "OTHER_APP_SCHEMES": " ",
-        "FACEBOOK_AUTO_LOG_APP_EVENTS": "true",
         "FACEBOOK_HYBRID_APP_EVENTS": "false",
+<<<<<<< HEAD
         "FACEBOOK_ADVERTISER_ID_COLLECTION": "true",
         "FACEBOOK_ANDROID_SDK_VERSION": "11.3.0",
         "FACEBOOK_IOS_SDK_VERSION": "11.1.0",
@@ -149,6 +146,10 @@
       "cordova-plugin-ionic-webview": {}
 ==
       // "cordova-plugin-androidx": {}
+=======
+        "FACEBOOK_ANDROID_SDK_VERSION": "5.13.0"
+      }
+>>>>>>> parent of 0caea01 (influ android code)
     },
     "platforms": [
       "android",

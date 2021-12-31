@@ -66,10 +66,6 @@ export class NotificationPage {
       this.navCtrl.push('PostDetailPage',{PostId:data.postId});
   }
 
-  if(data.screen=="job_done"){
-    this.navCtrl.push('JobDetialPage',{JobId:data.postId});
-  }
-
     if(data.screen=="job_hired"){
         this.navCtrl.push('HiredListPage',{service_id:data.postId});
     }

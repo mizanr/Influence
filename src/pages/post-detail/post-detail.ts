@@ -49,7 +49,7 @@ export class PostDetailPage {
 
   getPost(lodr:any) {
     let data = {
-      "user_id": this.auth.isUserLoggedIn()?this.auth.getCurrentUserId():this.auth.guest_id(),
+      "user_id": this.auth.getCurrentUserId(),
       "job_id": this.navParams.get('PostId'),
     }
     this.api.get(data, lodr, 'GetJobById').then((res: any) => {
@@ -89,7 +89,6 @@ export class PostDetailPage {
       let modal = this.api.modalCtrl.create('PaypalButtonPage', { Amount: k }, { cssClass: "alertModal", enableBackdropDismiss: true, showBackdrop: true });
     
       modal.onDidDismiss((data: any) => {
-        console.log('payment id -----',data);
         if (data) {
           this.runHireApi(obj, post_user_id, post_id, amt, data);
         }
@@ -301,11 +300,6 @@ export class PostDetailPage {
         this.getPost(0);
       }
     })
-  }
-
-  login(){
-    const modal = this.api.modal.create('LoginPopupPage',{},{cssClass:'moremodel',enableBackdropDismiss:true});
-    modal.present();
   }
 
 }

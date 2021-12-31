@@ -1,8 +1,12 @@
 import { AlertProvider } from './../../providers/alert/alert';
 import { AuthProvider } from './../../providers/auth/auth';
 import { TranslateService } from '@ngx-translate/core';
+<<<<<<< HEAD
 import { NavController, ActionSheetController, Events, App } from 'ionic-angular';
 // import { NavController, ActionSheetController, Events } from 'ionic-angular';
+=======
+import { NavController, ActionSheetController } from 'ionic-angular';
+>>>>>>> parent of 0caea01 (influ android code)
 import { RestApiProvider } from './../../providers/rest-api/rest-api';
 import { Component, Input } from '@angular/core';
 
@@ -23,15 +27,18 @@ export class PostComponent {
   constructor(public api: RestApiProvider,
     // public navCtrl: NavController,
     public trans: TranslateService,
+<<<<<<< HEAD
     public events:Events,
 
     public app:App,
+=======
+>>>>>>> parent of 0caea01 (influ android code)
     public actionSheetCtrl: ActionSheetController,
     public auth: AuthProvider,
     public alert: AlertProvider) {
   }
 
-  openAction(k) {
+  openAction(id) {
     let user = this.auth.getUserDetails();
     let btnText: any;
     if (user.user_type == 1) {
@@ -45,13 +52,10 @@ export class PostComponent {
           text: btnText,
           handler: () => {
             if (user.user_type == 1) {
-              console.log(k);
-              let textModal = this.api.modalCtrl.create('TextModalPage', { PostId: k.Id }, { cssClass: 'myModal' });
+              let textModal = this.api.modalCtrl.create('TextModalPage', { PostId: id }, { cssClass: 'myModal' });
               textModal.present();
             } else {
-              // this.alert.show('Alert!', 'Coming Soon!');
-              console.log(k);
-              this.block_user(k.created_by.id);
+              this.alert.show('Alert!', 'Coming Soon!')
             }
           }
         },
@@ -75,7 +79,6 @@ export class PostComponent {
 
 
   postdetail(item) {
-    console.log(item);
     if (item.type == 2) {
       // alert("post component");
       this.app.getActiveNav().push('PostDetailPage', { PostId: item.Id });
@@ -93,6 +96,7 @@ export class PostComponent {
       this.app.getActiveNav().push('InfluencerProfilePage', { InfluId: obj.created_by.id, PostId: obj.Id });
     }
   }
+<<<<<<< HEAD
 
   block_user(id){
     let data = {
@@ -112,4 +116,6 @@ export class PostComponent {
     
   }
 
+=======
+>>>>>>> parent of 0caea01 (influ android code)
 }

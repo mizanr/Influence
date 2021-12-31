@@ -50,7 +50,6 @@ export class FacebookProvider {
                                     }
 
                                     resolve(data);
-                                  //  alert('Facebook data fetched successfully----------'+JSON.stringify(data));
                                     this.loading.hide();
                               }, err => {
                                     reject(err);

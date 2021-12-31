@@ -3,7 +3,7 @@ page-influencer-profile {
     position: absolute;
     width: 100%;
     padding: 16px;
-    top: 25px;
+    top: 50px;
     color: #fff;
 
     .item {
@@ -53,7 +53,6 @@ page-influencer-profile {
           margin: 2px;
           text-align: center;
           font-size: 10px;
-          font-weight: 700;
         }
       }
     }
@@ -76,9 +75,8 @@ page-influencer-profile {
     ion-avatar img {
       border-radius: 50%;
       overflow: hidden;
-      width: 60px!important;
-      height: 60px !important;
-      object-fit: cover;
+      width: auto !important;
+      height: 50px !important;
     }
   }
   .detail_item {
@@ -359,7 +357,7 @@ page-influencer-profile {
   .inRight {
     position: absolute;
     right: 17px;
-    top: 170px;
+    top: 156px;
     margin: 0 !important;
     width: auto !important;
   }

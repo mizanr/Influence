@@ -4,7 +4,7 @@ import { RestApiProvider } from './../../providers/rest-api/rest-api';
 import { AuthProvider } from './../../providers/auth/auth';
 
 import { Component } from '@angular/core';
-import { NavController, NavParams, IonicPage, ActionSheetController, Refresher, Events } from 'ionic-angular';
+import { NavController, NavParams, IonicPage, ActionSheetController, Refresher } from 'ionic-angular';
 
 import { Observable } from 'Rxjs/rx';
 import { Subscription } from "rxjs/Subscription";
@@ -40,16 +40,9 @@ export class HomeInfluencerPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public auth: AuthProvider,
     public api: RestApiProvider,
-    public events:Events,
     public actionSheetCtrl: ActionSheetController,
     public trans: TranslateService,
     public alert: AlertProvider) {
-      this.events.subscribe('list_refresh',data => {
-        if(data){
-          this.start = 0;
-          this.getService('',1,'');
-        }
-      })
   }
 
   ionViewWillEnter() {
@@ -90,7 +83,7 @@ export class HomeInfluencerPage {
 
   getService(inf, s, refresher) {
     let data = {
-      "user_id": this.auth.isUserLoggedIn()?this.auth.getCurrentUserId():this.auth.guest_id(),
+      "user_id": this.auth.getCurrentUserId(),
       "type": 1,
       "category": this.filter.category,
       // "gender": this.filter.gender,
@@ -170,8 +163,7 @@ export class HomeInfluencerPage {
         {
           text: this.trans.instant('REPORT_COMPOANY'),
           handler: () => {
-            // this.alert.show('Alert!', 'Coming Soon!');
-            
+            this.alert.show('Alert!', 'Coming Soon!')
           }
         },
         {
@@ -186,8 +178,6 @@ export class HomeInfluencerPage {
     actionSheet.present();
 
   }
-
- 
 
   apply(obj) {
     obj.applied_status = 1;

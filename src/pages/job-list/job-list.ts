@@ -33,8 +33,7 @@ export class JobListPage {
 
   getJob() {
     let data = {
-      user_id: { "value": this.auth.getCurrentUserId(), "type": "NO" },
-      session_id: { "value": this.auth.getCurrentUserId(), "type": "NO" },
+      "user_id": { "value": this.auth.getCurrentUserId(), "type": "NO" },
     }
     this.api.postData(data, 0, 'GetMyJobList').then((res: any) => {
       // this.getinflus();

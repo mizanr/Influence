@@ -15,7 +15,6 @@ import * as firebase from 'Firebase';
 export class JobDetialPage {
   detail: any;
   user:any;
-  is_mark:any;
   ref = firebase.database().ref('chatrooms1/');
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public api: RestApiProvider,
@@ -32,14 +31,13 @@ export class JobDetialPage {
 
   getJob() {
     let data = {
-      "user_id": this.auth.isUserLoggedIn()?this.auth.getCurrentUserId():this.auth.guest_id(),
+      "user_id": this.auth.getCurrentUserId(),
       "job_id": this.navParams.get('JobId'),
     }
     this.api.get(data, 1, 'GetJobById').then((res: any) => {
       if (res.status == 1) {
         // this.categories = res.data
         this.detail = res.data[0];
-        this.is_mark=res.data[0].is_mark;
         // this.influServiceFee = res.influ_service_fee;
         // this.influeServiceInPercent = res.influ_service_fee_percent
       }
@@ -111,7 +109,6 @@ export class JobDetialPage {
     }
     this.api.postData(data, 1, 'applyJob').then((res: any) => {
       if (res.status == 1) {
-        this.getJob();
       }
       else {
         obj.applied_status = 0;
@@ -174,8 +171,6 @@ export class JobDetialPage {
       sender_image: this.auth.getUserDetails().image
     }
     data["unread_" + this.auth.getCurrentUserId()] = true;
-    data['show_id_'+this.auth.getCurrentUserId()]=true;
-    data['show_id_'+parseInt(this.detail.created_by.id)]=true;
     newData.set(data);
     let chat_room = firebase.database().ref('chatrooms1/' + roomKey);
     chat_room.update({ last_message: msg, last_message_at: time })
@@ -184,9 +179,12 @@ export class JobDetialPage {
 
 
   createRoom(job_id, job_title, other_user, item) {
+
     let profileModal = this.api.modalCtrl.create('SendMessagePage', { JobTitle: item.title }, { cssClass: "mymodal" });
     profileModal.onDidDismiss(result1 => {
       if (result1) {
+
+
         let other_user_id = parseInt(this.detail.created_by.id);
         let user_id = parseInt(this.auth.getCurrentUserId());
         let user1_name = "";
@@ -206,9 +204,6 @@ export class JobDetialPage {
         }
         data['user_' + other_user_id + '_open'] = false;
         data['user_' + this.auth.getCurrentUserId() + '_open'] = false;
-        data['_show_id_'+this.auth.getCurrentUserId()] = true;
-        data['_show_id_'+other_user_id ] = true;
-        
         console.log('data------------', data);
 
         newData.set(data);
@@ -220,35 +215,19 @@ export class JobDetialPage {
               // return;
               this.sendMsg(result1, rooms[index].key);
 
+              this.apply(item)
             }
           }
-              this.apply(item);
-
         });
+
+
+
       }
     });
     profileModal.present();
-  }
 
 
-  cancel_request() {
-    this.alert.confirmationAlert('Cancel Request','Are you sure?').then((res:any) => {
-      if(res){
-        let url = `CancelApplyJob?jobId=${this.navParams.get('JobId')}&apply_by=${this.auth.getCurrentUserId()}`;
-        // let url = `CancelApplyJob?jobId=${this.navParams.get('JobId')}`;
-        this.api.get({},1,url).then((res:any) => {
-          console.log(res);
-          if(res.status==1){
-            this.getJob();
-          }
-        })
-      }
-    })
-  }
 
-  login() {
-    const modal = this.api.modal.create('LoginPopupPage',{},{cssClass:'moremodel',enableBackdropDismiss:true});
-      modal.present();
   }
 
 }

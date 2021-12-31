@@ -55,6 +55,7 @@ export class ChangepasswordPage {
       confirmP: { "value": this.confirmP, "type": "NO" },
     }
 
+<<<<<<< HEAD
     this.encrypt.getEncryptedData2(this.old_pass).then((cP: any) => {
       this.encrypt.getEncryptedData2(this.new_pass).then((newP: any) => {
 
@@ -62,6 +63,12 @@ export class ChangepasswordPage {
         Data['password'].value = newP;
         Data['current_password'].value = cP; // cP.trim();
         Data['password'].value = newP; //newP.trim();
+=======
+    this.encrypt.getEncryptedData(this.old_pass).then((cP: any) => {
+      this.encrypt.getEncryptedData(this.new_pass).then((newP: any) => {
+        Data['current_password'].value = cP.trim();
+        Data['password'].value = newP.trim();
+>>>>>>> parent of 0caea01 (influ android code)
         this.rest_api.postData(Data, 1, 'change_password').then((result: any) => {
           console.log(result);
           if (result.status == 1) {

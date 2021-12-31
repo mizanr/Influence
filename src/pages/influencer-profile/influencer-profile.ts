@@ -47,7 +47,7 @@ export class InfluencerProfilePage {
     if (this.navParams.get('InfluId')) {
       this.inFluId = this.navParams.get('InfluId');
     } else {
-      this.inFluId = this.auth.isUserLoggedIn()?this.auth.getCurrentUserId():this.auth.guest_id();
+      this.inFluId = this.auth.getCurrentUserId();
     }
     this.postId = this.navParams.get('PostId');
     if (this.postId) {
@@ -59,7 +59,7 @@ export class InfluencerProfilePage {
   getProfile() {
     let data = {
       "id": this.inFluId,
-      "sessionId":this.auth.isUserLoggedIn()?this.auth.getCurrentUserId():this.auth.guest_id()
+      "sessionId":this.auth.getCurrentUserId()
     }
     this.api.get(data, 1, 'GetUserProfile').then((res: any) => {
       this.getImages();
@@ -103,7 +103,7 @@ export class InfluencerProfilePage {
   getService() {
     let data = {
       "created_by": { "value": this.inFluId, "type": "NO" },
-      "user_id": { "value": this.auth.isUserLoggedIn()?this.auth.getCurrentUserId():this.auth.guest_id(), "type": "NO" },
+      "user_id": { "value": this.auth.getCurrentUserId(), "type": "NO" },
       "type": { "value": 2, "type": "NO" },
     }
     this.api.postData(data, 0, 'getPostList').then((res: any) => {
@@ -132,15 +132,14 @@ export class InfluencerProfilePage {
   }
 
 
-  openAction() {
+  openAction(id) {
     const actionSheet = this.actionSheetCtrl.create({
-      title: this.trans.instant('REPORT'),//this.trans.instant('BLOCK_THIS_INFLUENCER'),
+      title: this.trans.instant('BLOCK_THIS_INFLUENCER'),
       buttons: [
         {
-          text: this.trans.instant('REPORT'),
+          text: this.trans.instant('BLOCK'),
           handler: () => {
-            this.report_influ();
-            // this.block_user();
+            this.block_user();
             // this.navCtrl.pop();
           }
         },
@@ -235,11 +234,6 @@ export class InfluencerProfilePage {
         this.getProfile();
       }
     })
-  }
-
-  report_influ() {
-    let textModal = this.api.modalCtrl.create('TextModalPage', { PostId: this.inFluId ,is_influ:1}, { cssClass: 'myModal' });
-    textModal.present();
   }
 
 }

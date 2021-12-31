@@ -66,15 +66,14 @@ export class LoginPage {
   }
 
   login() {
-    // if (this.plt.is('cordova')) {
-      this.encrypt.getEncryptedData2(this.loginForm.controls.password.value).then((r: any) => {
+    if (this.plt.is('cordova')) {
+      this.encrypt.getEncryptedData(this.loginForm.controls.password.value).then((r: any) => {
         let data = {
           "email": { "value": this.loginForm.controls.email.value, "type": "EMAIL" },
-          "password": { "value": r, "type": "NO" },
+          "password": { "value": r.trim(), "type": "NO" },
         }
         this.api.postData(data, 0, 'login').then((res: any) => {
           if (res.status == 1) {
-            localStorage.removeItem('guest');
             // this.alert.show("Alert!", res.message);
             // this.navCtrl.pop();
             this.events.publish('LoggedIn');
@@ -92,28 +91,27 @@ export class LoginPage {
 
       })
 
-    // } else {
-    //   let data = {
-    //     "email": { "value": this.loginForm.controls.email.value, "type": "EMAIL" },
-    //     "password": { "value": this.loginForm.controls.password.value, "type": "NO" },
-    //   }
-    //   this.api.postData(data, 0, 'login').then((res: any) => {
-    //     if (res.status == 1) {
-    //       localStorage.removeItem('guest');
-    //       // this.alert.show("Alert!", res.message);
-    //       // this.navCtrl.pop();
-    //       this.auth.updateUserDetails(res.data);
-    //       if (res.data.email_verified == 1) {
-    //         this.navCtrl.setRoot(TabsPage);
-    //       } else {
-    //         this.navCtrl.push('VerifyPage');
-    //       }
-    //     }
-    //     else {
-    //       this.alert.show(this.translateService.instant('ALERT'), res.message);
-    //     }
-    //   })
-    // }
+    } else {
+      let data = {
+        "email": { "value": this.loginForm.controls.email.value, "type": "EMAIL" },
+        "password": { "value": this.loginForm.controls.password.value, "type": "NO" },
+      }
+      this.api.postData(data, 0, 'login').then((res: any) => {
+        if (res.status == 1) {
+          // this.alert.show("Alert!", res.message);
+          // this.navCtrl.pop();
+          this.auth.updateUserDetails(res.data);
+          if (res.data.email_verified == 1) {
+            this.navCtrl.setRoot(TabsPage);
+          } else {
+            this.navCtrl.push('VerifyPage');
+          }
+        }
+        else {
+          this.alert.show(this.translateService.instant('ALERT'), res.message);
+        }
+      })
+    }
   }
 
 }

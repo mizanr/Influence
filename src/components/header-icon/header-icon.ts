@@ -1,5 +1,5 @@
 import { TranslateService } from '@ngx-translate/core';
-import { ModalController, NavController } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 import { AuthProvider } from './../../providers/auth/auth';
 import { Component } from '@angular/core';
 
@@ -19,7 +19,6 @@ export class HeaderIconComponent {
 
   constructor(public auth: AuthProvider,
     public navCtrl: NavController,
-    public modal:ModalController,
     public trans: TranslateService) {
     console.log('Hello HeaderIconComponent Component');
     this.text = 'Hello World';
@@ -27,11 +26,6 @@ export class HeaderIconComponent {
 
 
   openNoti() {
-    if(this.auth.isUserLoggedIn()){
-      this.navCtrl.push('NotificationPage');
-    } else {
-      const modal = this.modal.create('LoginPopupPage',{},{cssClass:'moremodel',enableBackdropDismiss:true});
-      modal.present();
-    }
+    this.navCtrl.push('NotificationPage');
   }
 }

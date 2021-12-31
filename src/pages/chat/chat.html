@@ -31,31 +31,28 @@
       <ion-icon name="ios-search-outline"></ion-icon>
       <p>{{'NO_DATA_FOUND' | translate}}</p>
     </div>
-    <div *ngFor="let k of chatList">
-      <ion-item-sliding #item  (click)="details(k)" *ngIf="show(k)">
-        <ion-item class="chat_list" no-lines>
-          <ion-avatar item-start>
-            <img *ngIf="users['user_'+k.other_user]" [src]="users['user_'+k.other_user].image">
-          </ion-avatar>
-          <h3 text-capitalize>
-            <span *ngIf="users['user_'+k.other_user]">{{users['user_'+k.other_user].first_name}}</span> &nbsp;
-          </h3>
-          <p>{{k.last_message}}</p>
-          <span item-end style="font-size: 9px;color: #3370d0;">{{k.last_message_at | date:'short'}}</span>
-          <ion-badge style="position: absolute;top: 2px;right: 6px;background: #af419a;" *ngIf="k.unread_msg>0"
-            class="bad" no-margin item-end>{{k.unread_msg}}</ion-badge>
-        </ion-item>
-        <!-- <ion-item-options side="left">
-          <button ion-button (click)="favorite(item)">Favorite</button>
-          <button ion-button color="danger" (click)="share(item)">Share</button>
-        </ion-item-options> -->
-  
-        <ion-item-options side="right">
-          <button ion-button color="danger" (click)="deleteChat(k);$event.stopPropagation()">{{'DELETE' |
-            translate}}</button>
-        </ion-item-options>
-      </ion-item-sliding>
-    </div>
-    
+    <ion-item-sliding #item *ngFor="let k of chatList" (click)="details(k)">
+      <ion-item class="chat_list" no-lines>
+        <ion-avatar item-start>
+          <img *ngIf="users['user_'+k.other_user]" [src]="users['user_'+k.other_user].image">
+        </ion-avatar>
+        <h3 text-capitalize>
+          <span *ngIf="users['user_'+k.other_user]">{{users['user_'+k.other_user].first_name}}</span> &nbsp;
+        </h3>
+        <p>{{k.last_message}}</p>
+        <span item-end style="font-size: 9px;color: #3370d0;">{{k.last_message_at | date:'short'}}</span>
+        <ion-badge style="position: absolute;top: 2px;right: 6px;background: #af419a;" *ngIf="k.unread_msg>0"
+          class="bad" no-margin item-end>{{k.unread_msg}}</ion-badge>
+      </ion-item>
+      <!-- <ion-item-options side="left">
+        <button ion-button (click)="favorite(item)">Favorite</button>
+        <button ion-button color="danger" (click)="share(item)">Share</button>
+      </ion-item-options> -->
+
+      <ion-item-options side="right">
+        <button ion-button color="danger" (click)="deleteChat(k);$event.stopPropagation()">{{'DELETE' |
+          translate}}</button>
+      </ion-item-options>
+    </ion-item-sliding>
   </ion-list>
 </ion-content>

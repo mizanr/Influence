@@ -83,8 +83,6 @@ export class ChatPage {
           item.key = childSnapshot.key;
           let otheruser = (item.user1 == this.auth.getCurrentUserId()) ? item.user2 : item.user1;
           item["other_user"] = otheruser;
-          // item['_show_id_'+this.auth.getCurrentUserId()]=true;
-          // item['_show_id_'+otheruser]=true;
           if (!this.users['user_' + otheruser]) {
             users.push(otheruser);
           }
@@ -95,7 +93,6 @@ export class ChatPage {
             m.off('value');
           })
           this.chatList.push(item);
-          console.log('list',this.chatList);
         }
       });
       this.sort();
@@ -158,32 +155,7 @@ export class ChatPage {
 
   deleteChat(obj) {
     console.log(obj);
-    var single_thread_ref  = firebase.database().ref('chatrooms1/' + obj.key);
-    obj['_show_id_'+this.auth.getCurrentUserId()]=false;
-    single_thread_ref.update(obj);
-    // this.all_thread_ref.on('value', (resp: any) => {
-    //   resp.forEach((childSnapshot) => {
-    //     let item = childSnapshot.val();
-    //     if(item.key==obj.key){
-    //       item['_show_id_'+this.auth.getCurrentUserId()]=false;
-    //     }
-    //   });
-    //     this.all_thread_ref.update();
-    // });
-
-    var chats_ref = firebase.database().ref('chatrooms1/' + obj.key + '/chats');
-    // console.log('chats----',chats_ref);
-    chats_ref.on('value', (resp: any) => {
-      resp.forEach(childSnapshot => {
-        let item = childSnapshot.val();
-        item.key = childSnapshot.key;
-        let key = 'show_id_'+this.auth.getCurrentUserId();
-        this.mark_as_delete_chat(item,key,obj.key);  
-        console.log('item====',item);
-      });
-      chats_ref.off('value');
-    })
-    // firebase.database().ref('chatrooms1/'+obj.key).remove();
+    firebase.database().ref('chatrooms1/'+obj.key).remove();
     // let data = {
     //   "user_id": this.auth.getCurrentUserId(),
     //   "job_id": obj.Job_detail.Id,
@@ -195,14 +167,6 @@ export class ChatPage {
     //   }
     // }, (err) => {
     // });
-  }
-
-  mark_as_delete_chat(item: any, key,roomKey) {
-    console.log("mark as delete chat--------");
-    let data = {};
-    data[key] = false;
-    let chat_ref = firebase.database().ref('chatrooms1/' + roomKey + '/chats/' + item.key);
-    chat_ref.update(data);
   }
 
 
@@ -222,14 +186,6 @@ export class ChatPage {
   // to get a value that is either negative, positive, or zero.
       return c < d ? 1 : -1;  
 });
-  }
-
-  show(item) {
-    // if(item['_show_id_'+this.auth.getCurrentUserId()]){
-      return item['_show_id_'+this.auth.getCurrentUserId()];
-    // } else {
-    //   return true;
-    // }
   }
 
 

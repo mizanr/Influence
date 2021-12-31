@@ -56,10 +56,13 @@ import { CommonModule } from '@angular/common';
 import { StarRatingModule } from 'ionic3-star-rating';
 import { RatePopupPage } from '../pages/rate-popup/rate-popup';
 import { Facebook } from '@ionic-native/facebook';
+<<<<<<< HEAD
 
 import { IOSFilePicker } from '@ionic-native/file-picker';
 import { WithdrawalPopupPage } from '../pages/withdrawal-popup/withdrawal-popup';
 
+=======
+>>>>>>> parent of 0caea01 (influ android code)
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -69,8 +72,11 @@ export function createTranslateLoader(http: HttpClient) {
     MyApp,
     TabsPage,
     RatePopupPage,
+<<<<<<< HEAD
     WithdrawalPopupPage,
     WithdrawalPopupPage
+=======
+>>>>>>> parent of 0caea01 (influ android code)
   ],
   imports: [
     StarRatingModule,
@@ -99,7 +105,6 @@ export function createTranslateLoader(http: HttpClient) {
     MyApp,
     TabsPage,
     RatePopupPage,
-    WithdrawalPopupPage,
   ],
   providers: [
     StatusBar,
