@@ -38,7 +38,8 @@ export class ChatDetailsPage {
   sendBtnDisabledS = false;
   toggled: boolean = false;
   message: string;
-  baseUrl = "https://www.webwiders.com/WEB01/Influ/assets/media/";
+  // baseUrl = "https://www.webwiders.com/WEB01/Influ/assets/media/";
+  baseUrl = "https://app-api.influen.site/assets/media/";
   senderImage: any;
   @ViewChild(Content) content: Content;
   constructor(public navCtrl: NavController, public navParams: NavParams, public api: RestApiProvider,

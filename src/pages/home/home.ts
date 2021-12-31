@@ -45,7 +45,7 @@ export class HomePage {
     public actionSheetCtrl: ActionSheetController,
     public paypal: PaypalProvider,
     public trans: TranslateService) {
-
+      
   }
 
   ionViewWillEnter() {
@@ -88,7 +88,7 @@ export class HomePage {
       // "post_type": { "value": this.filter.post_type, "type": "NO" },
       // "start": { "value": this.start, "type": "NO" },
       // "limit": { "value": 2, "type": "NO" },
-      "user_id": this.auth.getCurrentUserId(),
+      "user_id": this.auth.isUserLoggedIn()?this.auth.getCurrentUserId():this.auth.guest_id(),
       "type": 2,
       // "keywords": { "value": this.filter.keywords, "type": "NO" },
       "category": this.filter.category,
@@ -159,7 +159,7 @@ export class HomePage {
 
   getTopInflu(s) {
     let data = {
-      "user_id": this.auth.getCurrentUserId(),
+      "user_id": this.auth.isUserLoggedIn()?this.auth.getCurrentUserId():this.auth.guest_id(),
       "start": this.influStart,
       "limit": 10,
     }
@@ -251,7 +251,7 @@ export class HomePage {
 
     let data = {
       // "user_id": { "value": this.auth.getCurrentUserId(), "type": "NO" },
-      "hired_by": { "value": this.auth.getCurrentUserId(), "type": "NO" },
+      "hired_by": { "value": this.auth.isUserLoggedIn()?this.auth.getCurrentUserId():this.auth.guest_id(), "type": "NO" },
       // "keywords": { "value": this.filter.keywords, "type": "NO" },
       "hired_to": { "value": post_user_id, "type": "NO" },
       "jobId": { "value": post_id, "type": "NO" },

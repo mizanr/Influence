@@ -12,7 +12,7 @@
   </div>
   <div *ngFor="let item of chat;let i=index">
 
-    <div *ngIf="item.sender_id!=auth.getCurrentUserId()" class="user" [ngClass]="item.msg_type=='audio'?'hasaudio':''">
+    <div *ngIf="item.sender_id!=auth.getCurrentUserId()&&hidemsg(item)" class="user" [ngClass]="item.msg_type=='audio'?'hasaudio':''">
       <ion-row>
         <ion-col col-2>
           <div class="user_img">
@@ -23,7 +23,7 @@
         <ion-col col-10>
           <ion-item no-padding class="after_1">
             <p *ngIf="item.msg_type=='text'" style="padding-top: 8px;" class="dat">{{item.message}}</p>
-            <img (click)="openSlider([{name:baseUrl+item.message}],0)" *ngIf="item.msg_type=='image'"
+            <img (click)="openSlider([{name:baseUrl+item.message,file_type:'image'}],0)" *ngIf="item.msg_type=='image'"
               [src]="baseUrl+item.message">
             <div *ngIf="item.msg_type=='file'">
               <div (click)="openFile(item.message)" class="fileContainer">
@@ -132,21 +132,24 @@
     </div>
 
 
-    <div *ngIf="item.sender_id==auth.getCurrentUserId()" class="user" [ngClass]="item.msg_type=='audio'?'hasaudio':''">
+    <div *ngIf="item.sender_id==auth.getCurrentUserId()&&hidemsg(item)" class="user" [ngClass]="item.msg_type=='audio'?'hasaudio':''">
       <ion-row>
         <ion-col col-10 [ngClass]="auth.getUserLanguage()=='en'?'text-right':'text-left'">
           <ion-item no-padding class="after_1">
             <p style="padding-top: 8px;" *ngIf="item.msg_type=='text'" class="dat">{{item.message}}</p>
-            <img (click)="openSlider([{name:baseUrl+item.message}],0)" *ngIf="item.msg_type=='image'"
+            <img (click)="openSlider([{name:baseUrl+item.message,file_type:'image'}],0)" *ngIf="item.msg_type=='image'"
               [src]="baseUrl+item.message">
             <!-- <img *ngIf="item.msg_type=='image' && !item.id" [src]="item.id?baseUrl+item.message:item.preview"> -->
             <div *ngIf="item.msg_type=='file'">
-              <div *ngIf="item.id" (click)="openFile(item.message)" class="fileContainer">
+              <div (click)="openFile(item.message)" class="fileContainer">
                 <ion-icon name="md-document"></ion-icon>{{item.message}}
               </div>
-              <div *ngIf="!item.id" class="fileContainer">
+              <!-- <div *ngIf="item.id" (click)="openFile(item.message)" class="fileContainer">
+                <ion-icon name="md-document"></ion-icon>{{item.message}}
+              </div> -->
+              <!-- <div *ngIf="!item.id" class="fileContainer">
                 <ion-icon name="md-document"></ion-icon>{{item.preview}}
-              </div>
+              </div> -->
             </div>
             <div item-content class="audio_div">
 

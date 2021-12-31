@@ -14,6 +14,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { TranslateService } from '@ngx-translate/core';
 import * as firebase from 'firebase';
 import { JobDetialPage } from '../pages/job-detial/job-detial';
+import { EncryptProvider } from '../providers/encrypt/encrypt';
 const config = {
   apiKey: 'AIzaSyC0ALZAVZCK8bRgP2Rm1ihdjwT-tSLk3tE',
   authDomain: 'fir-85886.firebaseapp.com',
@@ -38,13 +39,16 @@ export class MyApp {
     public api: RestApiProvider,
     public google: GooglePlusProvider,
     public download: DownloadProvider,
+    public encry:EncryptProvider,
     // public config: Config,
     public app: App,
     public ionicApp: IonicApp,
     public alert: AlertProvider,
     public aP: AndroidPermissions
   ) {
+    // this.encry.getEncryptedData2('prasoon');
     platform.ready().then(() => {
+      localStorage.removeItem('guest');
       if (platform.is('cordova')) {
         this.setBackButton();
         this.onesignalsetup();
@@ -147,6 +151,12 @@ export class MyApp {
           setTimeout(() => {
             this.nav.push('WalletPage');
           }, 700);
+        }
+
+        if(data.screen=="job_done"){
+          setTimeout(() => {
+            this.nav.push('JobDetialPage',{JobId:data.postId});
+          },500);         
         }
 
         if (data.screen == 'ChatDetailsPage') {

@@ -44,7 +44,8 @@ export class ConversationPage {
   sendBtnDisabledS = false;
   toggled: boolean = false;
   message: string;
-  baseUrl = "https://www.webwiders.com/WEB01/Influ/assets/media/";
+  // baseUrl = "https://www.webwiders.com/WEB01/Influ/assets/media/";
+  baseUrl = "https://app-api.influen.site/assets/media/";
   senderImage: any;
   roomKey: any;
   other_user: any;
@@ -205,15 +206,24 @@ export class ConversationPage {
       message: msg,
       time_ago: time,
       sender_id: this.auth.getCurrentUserId(),
-      sender_image: this.senderImage
+      sender_image: this.senderImage,
+      
     }
+    data['show_id_'+this.auth.getCurrentUserId()]=true;
+    data['show_id_'+this.other_user.id]=true;
     data["unread_" + this.auth.getCurrentUserId()] = true;
     data["noti_status"] = 0;
 
 
     newData.set(data);
+    console.log('send data---',data);
 
-    this.chat_room_ref.update({ last_message: msg, last_message_at: time })
+    let d = {
+      last_message: msg, last_message_at: time,
+    }
+    d['_show_id_'+this.auth.getCurrentUserId()]=true;
+    d['_show_id_'+this.other_user.id]=true;
+    this.chat_room_ref.update(d)
     this.msg = '';
   }
 
@@ -365,13 +375,14 @@ export class ConversationPage {
 
     this.download.checkFileExistOrNot(link).then((res) => {
       if (res == 1) {
-        this.alert.confirmationAlert(this.trans.instant('CONFIRMATION'), this.trans.instant('FILE_ALREADY_EXISTS')).then((res) => {
-          if (res) {
-
-            this.download.download(link);
-          }
-
-        });
+        // this.download.download(link);
+        // this.alert.confirmationAlert(this.trans.instant('CONFIRMATION'), this.trans.instant('FILE_ALREADY_EXISTS')).then((res) => {
+        //   if (res) {
+        //     this.download.download(link);
+        //   } else {
+        //     this.download.download(link);
+        //   }
+        // });
       }
       else {
         this.download.download(link);
@@ -481,6 +492,10 @@ export class ConversationPage {
   //     sendDate: Date()
   //   });
   //   this.data.message = '';
-  // }
+  // 0}
+
+  hidemsg(item:any) {
+    return item['show_id_'+this.auth.getCurrentUserId()];
+  }
 
 }

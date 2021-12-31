@@ -15,7 +15,8 @@ export class AuthProvider {
   localStorageNotiData = "InfluNotiData";
   localStorageNotiCount = "InfluNotiUnreadCount";
 
-  mediaLink = 'https://www.webwiders.com/WEB01/Influ/assets/media/'
+  // mediaLink = 'https://www.webwiders.com/WEB01/Influ/assets/media/';
+  mediaLink = 'https://app-api.influen.site/assets/media/';
   onUserDetailChanged: BehaviorSubject<any> = new BehaviorSubject(null);
   onCateChanged: BehaviorSubject<any> = new BehaviorSubject(null);
   cartItem = new Array();
@@ -198,5 +199,9 @@ export class AuthProvider {
 
   getFloat(string) {
     return parseFloat(string)
+  }
+
+  guest_id() {
+    return '123456';
   }
 }
